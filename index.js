@@ -14,9 +14,19 @@ const PORT = process.env.PORT || 5000;
 // Cấu hình CORS
 const corsOptions = {
     origin: ['https://social-network-client2.vercel.app', 'https://social-network-client2-afhz500ut-huy-s-projects-492df757.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
 };
+
 app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://social-network-client2.vercel.app');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+
 // Endpoint kiểm tra kết nối server
 app.get("/", (req, res) => {
     return res.status(200).json({
