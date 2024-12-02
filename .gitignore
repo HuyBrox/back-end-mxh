@@ -1,0 +1,30 @@
+# Node.js
+node_modules/
+
+# Các file cấu hình của IDE, editor
+.vscode/
+.idea/
+
+# Các file của hệ điều hành
+.DS_Store
+Thumbs.db
+
+# Các file log
+*.log
+
+# Các file môi trường
+.env
+.env.local
+.env.*.local
+
+# Các thư mục build hoặc dist
+dist/
+build/
+
+# Các file liên quan đến cache
+.cache/
+
+# Các file liên quan đến các dependency đã biên dịch hoặc tạm thời
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
