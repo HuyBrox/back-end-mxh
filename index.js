@@ -11,6 +11,7 @@ import { ExpressPeerServer } from "peer"; // Import PeerServer
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
+
 // Cấu hình CORS
 const corsOptions = {
     origin: ['https://social-network-client2.vercel.app', 'https://social-network-client2-afhz500ut-huy-s-projects-492df757.vercel.app'],
@@ -21,6 +22,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// Middleware cho headers CORS tùy chỉnh
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'https://social-network-client2.vercel.app');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -28,6 +30,8 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
+
+// Xử lý preflight request
 app.options('*', (req, res) => {
     res.header('Access-Control-Allow-Origin', 'https://social-network-client2.vercel.app');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -49,8 +53,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
 
-
 await connectDB();
+
 // Tích hợp PeerServer vào Express
 const peerServer = ExpressPeerServer(server, {
     debug: true,       // Hiển thị thông tin debug
@@ -74,6 +78,5 @@ app.use("/api", indexRouter);
 
 // Kết nối database và khởi động server
 server.listen(PORT, async () => {
-
     console.log(`Server is running on port ${PORT}`);
 });
